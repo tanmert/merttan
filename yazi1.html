@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HaritaOfis'i Kodlarken Öğrendiğim 3 Önemli Ders — Mert Tan</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Epilogue:ital,wght@0,300;0,400;0,500;1,300;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="yazi1.css">
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <header class="navbar" id="navbar">
+        <a href="index.html" class="logo">MT<span class="logo-dot">.</span></a>
+        <div class="nav-right">
+            <span class="nav-tag tech-color">Kodlama Macerası</span>
+            <a href="index.html#blog" class="back-link">← Günlüğe Dön</a>
+        </div>
+    </header>
+
+    <!-- MAKALE -->
+    <main class="article-wrap">
+
+        <!-- HERO HEADER -->
+        <header class="article-header">
+            <div class="article-meta">
+                <span class="tag-pill tech-color-bg">Kodlama Macerası</span>
+                <span class="meta-sep">—</span>
+                <time class="meta-date">12 Mart 2026</time>
+                <span class="meta-sep">—</span>
+                <span class="meta-read">6 dk okuma</span>
+            </div>
+
+            <h1 class="article-title">
+                HaritaOfis'i Kodlarken<br>
+                <em>Öğrendiğim</em> 3 Önemli Ders
+            </h1>
+
+            <p class="article-lead">
+                Harita ofisi yönetirken "bunu daha iyi yapabilirsin" diye bakan bir yazılım görmedim. O yüzden kendim yazmaya karar verdim. Yolda düştüm, kalktım ve sandığımdan çok şey öğrendim.
+            </p>
+
+            <div class="author-row">
+                <div class="author-avatar">MT</div>
+                <div class="author-info">
+                    <span class="author-name">Mert Tan</span>
+                    <span class="author-title">Harita Mühendisi & HaritaOfis Kurucusu</span>
+                </div>
+            </div>
+
+            <!-- Dekoratif vurgulu alıntı -->
+            <div class="hero-pull-quote">
+                <div class="hpq-line tech-bg"></div>
+                <blockquote>
+                    "Sahada koordinat ölçerken de, ekranda satır yazarken de aslında aynı şeyi yapıyordum: belirsizliği düzene sokmak."
+                </blockquote>
+            </div>
+        </header>
+
+        <!-- İÇERİK -->
+        <article class="article-body">
+
+            <!-- GİRİŞ -->
+            <section class="prose-section">
+                <p>
+                    BM Tan Mühendislik'te müşteri dosyalarını, belediye takip süreçlerini ve evrak akışlarını yönetmek her geçen yıl biraz daha karmaşık bir hal aldı. Kullandığım araçlar ya çok geneldi ya da harita ofisinin gerçekliğine hiç uymuyordu. Bir gün kendime şunu sordum:
+                </p>
+
+                <div class="callout callout-tech">
+                    <span class="callout-icon">💡</span>
+                    <p><em>"Ben her gün müşteri takibi yapıyorum, neden bunu otomatik yapan bir sistem yok?"</em></p>
+                </div>
+
+                <p>
+                    Cevap basitti: yoktu, çünkü kimse harita ofisi işleyişini gerçekten bilmeden bu yazılımı yazmamıştı. O gün kolları sıvadım. Bir yılı aşkın süren bu macerada; kimi gece dört saatlik uyku, kimi gün "sil baştan" kararları ve kimi hafta "acaba bırakayım mı?" sorularıyla karşılaştım. Ama sonunda <strong>HaritaOfis</strong> ortaya çıktı. Ve bu süreç bana kodlamanın çok ötesinde üç ders verdi.
+                </p>
+            </section>
+
+            <!-- DERS 1 -->
+            <section class="lesson-section">
+                <div class="lesson-number tech-color">01</div>
+                <div class="lesson-content">
+                    <h2>Alanı Bilmeden Yazdığın Kod, Alanı Bilmeyen Birine Değer Vermez</h2>
+
+                    <p>
+                        İlk prototipimi yazdığımda çok heyecanlıydım. Müşteri bilgilerini girilebilen, dosya eklenebilen güzel bir form ekranı. Teknik olarak çalışıyordu. Ama bir gün ofiste oturup gerçekten kullanmaya çalıştığımda fark ettim: Bu form harita ofisinin dilini konuşmuyordu.
+                    </p>
+
+                    <p>
+                        Bir ifraz işleminde "parsel numarası", "pafta", "ada" ve "belediye onay tarihi" birbirinden bağımsız ama aynı anda takip edilmesi gereken kavramlar. Bunları genel bir "müşteri kaydı" formuna sıkıştırmak, işi kolaylaştırmak bir yana, daha da girift hale getiriyordu.
+                    </p>
+
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">Yanlış yaklaşım — Çok genel</span>
+                        </div>
+                        <pre><code><span class="c-dim">// İlk yazım: Genel bir CRM gibi düşündüm</span>
+müşteri.ad = "Ahmet Bey"
+müşteri.notlar = "ifraz işlemi var"  <span class="c-dim">// ← Bu yeterli değil!</span>
+
+<span class="c-dim">// Doğru yaklaşım: Alanı yansıtan veri modeli</span>
+<span class="c-key">dosya</span>.parselNo    = <span class="c-str">"125/3"</span>
+<span class="c-key">dosya</span>.ada         = <span class="c-str">"42"</span>
+<span class="c-key">dosya</span>.pafta       = <span class="c-str">"F19C2"</span>
+<span class="c-key">dosya</span>.belediyeAşama = <span class="c-str">"Onay Bekliyor"</span>
+<span class="c-key">dosya</span>.sonTarih    = <span class="c-str">"2026-03-20"</span></code></pre>
+                    </div>
+
+                    <p>
+                        Yazılımı yeniden yazmak zorunda kaldım. Ama bu "yeniden yazma" aslında en değerli adımdı. Çünkü bu sefer kağıda önce şunu çizdim: Bir ifraz dosyası ofisimizde nasıl bir yolculuk yapıyor? Hangi adımda hangi bilgiye ihtiyaç var? Belediyeyle muhatap olurken ne soruyorlar?
+                    </p>
+
+                    <div class="insight-box">
+                        <span class="insight-label tech-color">Çıkarılan Ders</span>
+                        <p>Kod yazmadan önce en az iki hafta sadece <em>süreci gözlemle</em>. Kağıda çiz. Müşterilerle konuş. Kullanıcı sen bile olsan, "geliştirici gözü" süreci körleştirir.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- DERS 2 -->
+            <section class="lesson-section">
+                <div class="lesson-number map-color">02</div>
+                <div class="lesson-content">
+                    <h2>Mükemmel Sistemi Beklemek, Sistemsiz Çalışmakla Aynı Şey</h2>
+
+                    <p>
+                        İkinci büyük hatam "hazır olmadan yayınlamama" takıntısıydı. Belediye entegrasyonu olsun, otomatik SMS bildirimi çıksın, takvim senkronizasyonu eklensin... Ay geçiyor, kod yazılıyor ama ofiste hâlâ eski yöntemle çalışılıyordu.
+                    </p>
+
+                    <p>
+                        Bir gün mentorum — aslında deneyimli bir yazılımcı değil, yıllarca müteahhitlik yapmış bir arkadaşım — bana şunu dedi: <em>"Yarım bina, boş arsadan iyidir. İnsanlar içinde yaşamaya başlayınca ne eksik olduğunu söylerler."</em>
+                    </p>
+
+                    <p>
+                        Bu söz kafama kazındı. Ertesi gün temel özellikleri çalışır hale getirip sistemi ofisimde kullanmaya başladım. Üç hafta içinde gerçek kullanımdan doğan on beş farklı eksikliği fark ettim — bunların hiçbirini masada otururken tahmin edemezdim.
+                    </p>
+
+                    <div class="callout callout-map">
+                        <span class="callout-icon">🗺️</span>
+                        <p>Harita ölçümünde de aynı ilke geçerli: Önce röper noktalarını al, sonra detay ölçüme geç. Tüm noktaları kafada planlamak yerine sahaya çık.</p>
+                    </div>
+
+                    <div class="timeline-mini">
+                        <div class="tl-m-item">
+                            <div class="tl-m-dot tech-bg"></div>
+                            <div><strong>Ay 1–3</strong> — Temel modüller: müşteri, dosya, durum takibi</div>
+                        </div>
+                        <div class="tl-m-item">
+                            <div class="tl-m-dot map-bg"></div>
+                            <div><strong>Ay 4–5</strong> — Gerçek kullanım, geri bildirim toplama</div>
+                        </div>
+                        <div class="tl-m-item">
+                            <div class="tl-m-dot sport-bg"></div>
+                            <div><strong>Ay 6+</strong> — Gerçek ihtiyaçlara göre yeni özellikler</div>
+                        </div>
+                    </div>
+
+                    <div class="insight-box">
+                        <span class="insight-label map-color">Çıkarılan Ders</span>
+                        <p>"Yeterince iyi" olan bir sistem bugün, "mükemmel" olan bir sistem asla olacak bir sistem değildir. <em>Erken kullan, erken öğren.</em></p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- DERS 3 -->
+            <section class="lesson-section">
+                <div class="lesson-number sport-color">03</div>
+                <div class="lesson-content">
+                    <h2>Teknik Olmayan Problemler, Teknik Problemlerden Daha Zor</h2>
+
+                    <p>
+                        Yazılımın teknik kısmını öğrenmek; HTML, CSS, biraz JavaScript ve birkaç AI aracıyla mümkün oldu. Asıl zorluk hiçbir zaman "bu kodu nasıl yazarım?" olmadı. Asıl zorluk şu sorulardı:
+                    </p>
+
+                    <ul class="article-list">
+                        <li>Müşteriyi nasıl sisteme geçiririm, direnci nasıl kırarım?</li>
+                        <li>Belediye süreçleri değiştiğinde sistemi hızlıca nasıl güncellerim?</li>
+                        <li>Bir özelliğe haftalar harcadım ama kimse kullanmıyor — ne yapacağım?</li>
+                        <li>Güncelleme yaparken eski veri bozulursa ne olur?</li>
+                    </ul>
+
+                    <p>
+                        Bu sorular "yazılım geliştirme" sorusu değil, "değişim yönetimi", "kullanıcı psikolojisi" ve "risk yönetimi" sorularıydı. Basketbol antrenörlüğü yıllarım burada devreye girdi. Bir takıma yeni bir savunma sistemi öğretmek de tam böyle hissettiriyor: Teknik olarak doğru bile olsa, oyuncular benimsemezse sahada işe yaramıyor.
+                    </p>
+
+                    <div class="split-compare">
+                        <div class="compare-col">
+                            <span class="compare-label sport-color">Basketbol Sahası</span>
+                            <ul>
+                                <li>Yeni sistem önce anlamsız gelir</li>
+                                <li>Küçük kazanımlar güven oluşturur</li>
+                                <li>Takım içi direnci kırmak zaman ister</li>
+                                <li>Gerçek maçta test edilmeden bilgi eksik</li>
+                            </ul>
+                        </div>
+                        <div class="compare-divider"></div>
+                        <div class="compare-col">
+                            <span class="compare-label tech-color">Yazılım Kullanımı</span>
+                            <ul>
+                                <li>Yeni sistem önce zahmetli gelir</li>
+                                <li>Küçük kolaylıklar benimsemeyi tetikler</li>
+                                <li>Kullanıcı direncini kırmak zaman ister</li>
+                                <li>Gerçek kullanımda test edilmeden bilinmez</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <p>
+                        Çözüm her iki durumda da aynıydı: <strong>Sabır, tutarlılık ve küçük adımlar.</strong> Ofisimdeki çalışma arkadaşlarıma sistemi zorla değil, önce en sıkıcı manuel işi otomatikleştirerek tanıttım. İlk günden "her şeyi bu sistemden yönetin" demedim; "belediye takibini bundan yapın, gerisine dokunmayın" dedim.
+                    </p>
+
+                    <div class="insight-box">
+                        <span class="insight-label sport-color">Çıkarılan Ders</span>
+                        <p>En iyi yazılım, insanları dönüştürmek yerine insanlara <em>uyum sağlayan</em> yazılımdır. Kullanıcı direnci bir hata değil, bir bilgi kaynağıdır.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- KAPANIŞ -->
+            <section class="prose-section closing-section">
+                <h2>Sonuç</h2>
+                <p>
+                    HaritaOfis hâlâ gelişiyor. Her yeni özellik, yeni bir ders getiriyor. Ama bu üç temel ders — <span class="tech-color">alanı bil</span>, <span class="map-color">erken yayınla</span>, <span class="sport-color">insan sorununu ihmal etme</span> — artık her satır kod yazarken aklımın bir köşesinde duruyor.
+                </p>
+                <p>
+                    Harita mühendisliğinde öğrendiğim en önemli şeylerden biri şuydu: Arazinin bir karakteri vardır ve onu sahaya çıkmadan anlayamazsın. Yazılımın da bir karakteri var. Ve onu ancak gerçek kullanıcının eline vererek öğrenebilirsin.
+                </p>
+
+                <div class="closing-quote">
+                    <p>"Hem sahada hem ekranda en değerli alet: gözlemlemek için ayırdığın zaman."</p>
+                    <cite>— Mert Tan</cite>
+                </div>
+            </section>
+
+        </article>
+
+        <!-- YAZAR KUTUSU -->
+        <div class="author-box">
+            <div class="author-box-avatar">MT</div>
+            <div class="author-box-info">
+                <h3>Mert Tan</h3>
+                <p>Bodrum'da harita mühendisi, HaritaOfis'in kurucusu ve (eski) basketbol oyuncusu. Sahanın disiplinini dijital dünyaya taşımayı seven biri.</p>
+                <div class="author-box-links">
+                    <a href="https://www.bmtan.com" target="_blank">bmtan.com ↗</a>
+                    <a href="https://www.bmtanmuhendislik.com" target="_blank">bmtanmuhendislik.com ↗</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- DİĞER YAZILAR -->
+        <div class="more-articles">
+            <h3>Diğer Yazılar</h3>
+            <div class="more-grid">
+                <a href="#yazi2" class="more-card">
+                    <span class="more-tag sport-color">Parkeden Notlar</span>
+                    <h4>Parkelerden Şantiyeye: Takım Ruhu Bize Ne Anlatır?</h4>
+                    <span class="more-date">5 Mart 2026</span>
+                </a>
+                <a href="#yazi3" class="more-card">
+                    <span class="more-tag map-color">Saha Günlüğü</span>
+                    <h4>Bodrum'da İmar Çalışmaları ve Karşılaşılan Zorluklar</h4>
+                    <span class="more-date">28 Şubat 2026</span>
+                </a>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="article-footer">
+        <a href="index.html" class="back-home">← Ana Sayfaya Dön</a>
+        <span class="footer-copy">© 2026 Mert Tan</span>
+    </footer>
+
+    <script>
+        // Navbar scroll
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            navbar.classList.toggle('scrolled', window.scrollY > 50);
+        }, { passive: true });
+
+        // Okuma ilerlemesi
+        const bar = document.createElement('div');
+        bar.className = 'reading-progress';
+        document.body.prepend(bar);
+
+        window.addEventListener('scroll', () => {
+            const doc = document.documentElement;
+            const scrollTop = doc.scrollTop || document.body.scrollTop;
+            const scrollHeight = doc.scrollHeight - doc.clientHeight;
+            const progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+            bar.style.width = progress + '%';
+        }, { passive: true });
+    </script>
+</body>
+</html>

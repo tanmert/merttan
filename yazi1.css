@@ -1,0 +1,752 @@
+/* =============================================
+   RENK PALETİ
+   ============================================= */
+:root {
+    --color-map:    #C8A055;
+    --color-tech:   #4ECDC4;
+    --color-sport:  #E8622A;
+
+    --bg:           #0C0C0C;
+    --bg-card:      #141414;
+    --bg-elevated:  #181818;
+
+    --text-primary: #F0EBE3;
+    --text-muted:   #7a7a7a;
+    --text-faint:   #444;
+
+    --border:       rgba(255,255,255,0.07);
+
+    /* Yazı sütunu genişliği */
+    --prose-width:  680px;
+}
+
+/* =============================================
+   TEMEL SIFIRLAMA
+   ============================================= */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+    background: var(--bg);
+    color: var(--text-primary);
+    font-family: 'Epilogue', sans-serif;
+    font-size: 1.05rem;
+    line-height: 1.8;
+    overflow-x: hidden;
+}
+
+/* Kaydırma çubuğu */
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--color-tech); }
+
+/* Okuma ilerleme çubuğu */
+.reading-progress {
+    position: fixed;
+    top: 0; left: 0;
+    height: 3px;
+    width: 0%;
+    background: linear-gradient(90deg, var(--color-tech), var(--color-map));
+    z-index: 2000;
+    transition: width 0.1s linear;
+}
+
+/* =============================================
+   YARDIMCI RENKLER
+   ============================================= */
+.map-color    { color: var(--color-map)   !important; }
+.tech-color   { color: var(--color-tech)  !important; }
+.sport-color  { color: var(--color-sport) !important; }
+
+.map-bg    { background: var(--color-map)   !important; }
+.tech-bg   { background: var(--color-tech)  !important; }
+.sport-bg  { background: var(--color-sport) !important; }
+
+/* =============================================
+   NAVBAR
+   ============================================= */
+.navbar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 6%;
+    background: rgba(12,12,12,0.9);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid transparent;
+    transition: padding 0.3s, border-color 0.3s;
+}
+
+.navbar.scrolled {
+    padding: 14px 6%;
+    border-color: var(--border);
+}
+
+.logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.5rem;
+    color: var(--text-primary);
+    text-decoration: none;
+    letter-spacing: -1px;
+}
+
+.logo-dot { color: var(--color-map); }
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.nav-tag {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.back-link {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.25s;
+    padding: 7px 16px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+}
+
+.back-link:hover { color: var(--text-primary); border-color: rgba(255,255,255,0.15); }
+
+/* =============================================
+   MAKALE SARMALAYICI
+   ============================================= */
+.article-wrap {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+/* =============================================
+   MAKALE HEADER
+   ============================================= */
+.article-header {
+    padding-top: 140px;
+    padding-bottom: 64px;
+    border-bottom: 1px solid var(--border);
+}
+
+/* Meta bilgiler */
+.article-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+}
+
+.tag-pill {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 100px;
+    color: #0C0C0C;
+}
+
+.tech-color-bg { background: var(--color-tech); }
+
+.meta-sep { color: var(--text-faint); font-size: 0.9rem; }
+
+.meta-date,
+.meta-read {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+/* Başlık */
+.article-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2.4rem, 6vw, 4rem);
+    font-weight: 800;
+    line-height: 1.08;
+    letter-spacing: -2px;
+    color: var(--text-primary);
+    margin-bottom: 28px;
+}
+
+.article-title em {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--color-tech);
+}
+
+/* Lead paragraf */
+.article-lead {
+    font-size: 1.25rem;
+    color: var(--text-muted);
+    line-height: 1.75;
+    max-width: var(--prose-width);
+    margin-bottom: 40px;
+    font-weight: 300;
+    font-style: italic;
+}
+
+/* Yazar satırı */
+.author-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 48px;
+}
+
+.author-avatar {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--color-tech), var(--color-map));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 0.9rem;
+    color: #0C0C0C;
+    flex-shrink: 0;
+}
+
+.author-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.author-name {
+    font-weight: 600;
+    font-size: 0.93rem;
+    color: var(--text-primary);
+}
+
+.author-title {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+}
+
+/* Pull quote */
+.hero-pull-quote {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 28px 0;
+    max-width: var(--prose-width);
+}
+
+.hpq-line {
+    width: 3px;
+    min-height: 60px;
+    border-radius: 2px;
+    flex-shrink: 0;
+    margin-top: 4px;
+}
+
+.hero-pull-quote blockquote {
+    font-family: 'Epilogue', sans-serif;
+    font-size: 1.2rem;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--text-primary);
+    line-height: 1.65;
+}
+
+/* =============================================
+   MAKALE GÖVDE
+   ============================================= */
+.article-body {
+    padding: 72px 0 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+/* Genel prose bölümler */
+.prose-section {
+    max-width: var(--prose-width);
+    margin-bottom: 72px;
+}
+
+.prose-section p + p { margin-top: 22px; }
+
+.article-body p {
+    color: #C8C2BA;
+    font-size: 1.05rem;
+    line-height: 1.85;
+}
+
+.article-body strong {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+/* =============================================
+   DERS BÖLÜMÜ
+   ============================================= */
+.lesson-section {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 32px;
+    margin-bottom: 80px;
+    padding-top: 56px;
+    border-top: 1px solid var(--border);
+    align-items: start;
+}
+
+.lesson-number {
+    font-family: 'Syne', sans-serif;
+    font-size: 4.5rem;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -3px;
+    opacity: 0.9;
+    padding-top: 4px;
+}
+
+.lesson-content { display: flex; flex-direction: column; gap: 22px; }
+
+.lesson-content h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1.4rem, 2.8vw, 1.9rem);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.8px;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+}
+
+/* =============================================
+   CALLOUT KUTULAR
+   ============================================= */
+.callout {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    padding: 20px 22px;
+    border-radius: 12px;
+    border-left: 3px solid;
+}
+
+.callout-tech {
+    background: rgba(78,205,196,0.07);
+    border-color: var(--color-tech);
+}
+
+.callout-map {
+    background: rgba(200,160,85,0.07);
+    border-color: var(--color-map);
+}
+
+.callout-icon { font-size: 1.2rem; flex-shrink: 0; padding-top: 2px; }
+
+.callout p {
+    font-size: 0.98rem !important;
+    color: var(--text-primary) !important;
+}
+
+/* =============================================
+   KOD BLOĞU
+   ============================================= */
+.code-block {
+    background: #0a0a0a;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.code-header {
+    padding: 10px 18px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    background: rgba(255,255,255,0.02);
+}
+
+.code-lang {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--text-faint);
+    letter-spacing: 0.5px;
+}
+
+.code-block pre {
+    padding: 22px 22px;
+    overflow-x: auto;
+}
+
+.code-block code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.88rem;
+    line-height: 1.9;
+    color: #B0A898;
+    display: block;
+}
+
+.c-dim  { color: #444; }
+.c-key  { color: var(--color-tech); }
+.c-str  { color: var(--color-map); }
+
+/* =============================================
+   INSIGHT KUTUSU
+   ============================================= */
+.insight-box {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px 26px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.insight-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.insight-box p {
+    font-size: 0.98rem !important;
+    color: var(--text-primary) !important;
+}
+
+/* =============================================
+   MİNİ TİMELINE
+   ============================================= */
+.timeline-mini {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding-left: 12px;
+    border-left: 2px solid var(--border);
+}
+
+.tl-m-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+    padding: 14px 0 14px 4px;
+    font-size: 0.93rem;
+    color: #C8C2BA;
+    position: relative;
+}
+
+.tl-m-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 5px;
+    margin-left: -18px;
+    border: 2px solid var(--bg);
+}
+
+/* =============================================
+   KARŞILAŞTIRMA TABLOSU
+   ============================================= */
+.split-compare {
+    display: grid;
+    grid-template-columns: 1fr 1px 1fr;
+    gap: 28px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px;
+    align-items: start;
+}
+
+.compare-divider {
+    background: var(--border);
+    height: 100%;
+    min-height: 120px;
+}
+
+.compare-label {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 14px;
+}
+
+.compare-col ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.compare-col li {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    padding-left: 16px;
+    position: relative;
+    line-height: 1.5;
+}
+
+.compare-col li::before {
+    content: '–';
+    position: absolute;
+    left: 0;
+    color: var(--text-faint);
+}
+
+/* =============================================
+   MAKALE LİSTELERİ
+   ============================================= */
+.article-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 4px 0;
+}
+
+.article-list li {
+    font-size: 1rem;
+    color: #C8C2BA;
+    padding-left: 22px;
+    position: relative;
+    line-height: 1.7;
+}
+
+.article-list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--color-tech);
+    font-weight: 600;
+}
+
+/* =============================================
+   KAPANIŞ
+   ============================================= */
+.closing-section h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    letter-spacing: -0.6px;
+    margin-bottom: 20px;
+}
+
+.closing-section p + p { margin-top: 20px; }
+
+.closing-quote {
+    margin-top: 40px;
+    padding: 32px 36px;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    background: var(--bg-elevated);
+    text-align: center;
+}
+
+.closing-quote p {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--text-primary) !important;
+    letter-spacing: -0.4px;
+    line-height: 1.5;
+    margin-bottom: 16px;
+}
+
+.closing-quote cite {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+/* =============================================
+   YAZAR KUTUSU
+   ============================================= */
+.author-box {
+    display: flex;
+    gap: 28px;
+    align-items: flex-start;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 36px;
+    margin-bottom: 56px;
+}
+
+.author-box-avatar {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--color-tech), var(--color-map));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: #0C0C0C;
+    flex-shrink: 0;
+}
+
+.author-box-info h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.author-box-info p {
+    font-size: 0.93rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 16px;
+}
+
+.author-box-links {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.author-box-links a {
+    font-size: 0.85rem;
+    color: var(--color-tech);
+    text-decoration: none;
+    font-weight: 600;
+    transition: opacity 0.2s;
+}
+
+.author-box-links a:hover { opacity: 0.75; }
+
+/* =============================================
+   DAHA FAZLA YAZI
+   ============================================= */
+.more-articles {
+    margin-bottom: 80px;
+}
+
+.more-articles h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+}
+
+.more-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.more-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: border-color 0.25s, transform 0.25s;
+}
+
+.more-card:hover {
+    border-color: rgba(255,255,255,0.15);
+    transform: translateY(-4px);
+}
+
+.more-tag {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.more-card h4 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.4;
+    flex: 1;
+}
+
+.more-date {
+    font-size: 0.8rem;
+    color: var(--text-faint);
+    margin-top: 4px;
+}
+
+/* =============================================
+   FOOTER
+   ============================================= */
+.article-footer {
+    border-top: 1px solid var(--border);
+    padding: 28px 24px;
+    max-width: 860px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.back-home {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.25s;
+}
+
+.back-home:hover { color: var(--color-map); }
+
+.footer-copy {
+    font-size: 0.82rem;
+    color: var(--text-faint);
+}
+
+/* =============================================
+   MOBİL
+   ============================================= */
+@media (max-width: 768px) {
+    .article-title { letter-spacing: -1px; }
+    .article-lead { font-size: 1.1rem; }
+
+    .lesson-section {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .lesson-number {
+        font-size: 3rem;
+    }
+
+    .split-compare {
+        grid-template-columns: 1fr;
+    }
+
+    .compare-divider { display: none; }
+
+    .more-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .author-box {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .nav-tag { display: none; }
+}
